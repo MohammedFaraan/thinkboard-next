@@ -1,0 +1,43 @@
+import NextAuth from "next-auth";
+import GitHub from "next-auth/providers/github";
+import { connectDB } from "./lib/db";
+import { User } from "./models/User";
+
+export const { handlers, auth } = NextAuth({
+  providers: [
+    GitHub({
+      clientId: process.env.AUTH_GITHUB_ID,
+      clientSecret: process.env.AUTH_GITHUB_SECRET,
+    }),
+  ],
+  secret: process.env.AUTH_SECRET,
+  callbacks: {
+    async signIn({ user, account }) {
+      console.log("Signing in...");
+      if (account?.provider === "github") {
+        await connectDB();
+
+        const u = await User.findOneAndUpdate(
+          { email: user.email! },
+          {
+            name: user.name!,
+            email: user.email!,
+            profilePic: user.image!,
+          },
+          { upsert: true }
+        );
+        console.log(u);
+        return true;
+      }
+      return false;
+    },
+    async session({ session }) {
+      const dbUser = await User.findOne({ email: session.user.email });
+
+      session.user.name = dbUser.name!;
+      session.user.email = dbUser.email!;
+      session.user.profilePic = dbUser.profilePic!;
+      return session;
+    },
+  },
+});
