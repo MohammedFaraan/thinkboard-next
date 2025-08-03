@@ -26,7 +26,6 @@ export const { handlers, auth } = NextAuth({
           },
           { upsert: true }
         );
-        console.log(u);
         return true;
       }
       return false;
@@ -34,6 +33,7 @@ export const { handlers, auth } = NextAuth({
     async session({ session }) {
       const dbUser = await User.findOne({ email: session.user.email });
 
+      session.user.id = dbUser._id!,
       session.user.name = dbUser.name!;
       session.user.email = dbUser.email!;
       session.user.profilePic = dbUser.profilePic!;
