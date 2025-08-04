@@ -28,13 +28,13 @@ export default function NotesMainContent() {
     <div>
       <h1 className="text-2xl font-bold mb-4">All Notes</h1>
       {/* Replace below with actual note cards */}
-      <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 gap-x-2 overflow-hidden overflow-auto ">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {
           notes && notes.length > 0 ? (
-            notes.map((note, _) => (
-              <NoteCard details={note}/>
+            notes.map((note, index) => (
+              <NoteCard details={note} key={index}/>
             ))
-          ) : ("")
+          ) : (<div>No notes found</div>)
         }
       </div>
     </div>
