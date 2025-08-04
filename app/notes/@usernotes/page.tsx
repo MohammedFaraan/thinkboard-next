@@ -3,13 +3,11 @@ import NoteCard from "@/components/NoteCard";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-const API_URL = `http://localhost:3000/api/notes`;
-console.log("url", process.env.NEXT_URL)
+const API_URL = process.env.NEXT_PUBLIC_URL + "/api/notes";
 
 // app/notes/@usernotes/page.tsx
 export default function NotesMainContent() {
   const [notes, setNotes] = useState([]);
-
   const fetchNotes = () => {
     try {
       axios.get(API_URL).then((res) => setNotes(res.data));
@@ -23,7 +21,6 @@ export default function NotesMainContent() {
     fetchNotes();
   }, [])
   
-  console.log(notes)
   return (
     <div>
       <h1 className="text-2xl font-bold mb-4">All Notes</h1>
@@ -32,7 +29,7 @@ export default function NotesMainContent() {
         {
           notes && notes.length > 0 ? (
             notes.map((note, index) => (
-              <NoteCard details={note} key={index}/>
+              <NoteCard details={note} fetchNotes={fetchNotes} setNotes={setNotes} key={index}/>
             ))
           ) : (<div>No notes found</div>)
         }

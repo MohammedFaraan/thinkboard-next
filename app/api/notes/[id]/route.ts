@@ -16,7 +16,7 @@ export async function GET(
     if (!note || note.length === 0)
       return NextResponse.json({ message: "Note not found" }, { status: 404 });
 
-    return NextResponse.json(note);
+    return NextResponse.json(note[0]);
   } catch (error) {
     console.log("Error while fetching note", error);
     return NextResponse.json(
@@ -34,7 +34,7 @@ export async function PUT(
     const { id } = await params;
 
     await connectDB();
-    const { title, content, tags } = await request.json();
+    const { title, content } = await request.json();
 
     if (!title) {
       return NextResponse.json(
@@ -44,7 +44,7 @@ export async function PUT(
     }
     const note = await Note.findOneAndUpdate(
       { _id: id },
-      { title, content, tags }
+      { title, content }
     );
 
     if (!note)

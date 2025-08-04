@@ -13,9 +13,7 @@ const noteSchema = new Schema({
     content: {
         type: String,
     },
-    tags: {
-        type: [String],
-    },
+    
 }, {timestamps: true})
 
 export const Note = models.Note || model("Note", noteSchema);

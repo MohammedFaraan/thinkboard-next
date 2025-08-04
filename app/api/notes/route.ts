@@ -36,7 +36,7 @@ export async function POST(request: NextRequest) {
     const userId = "688f1aba61ba7a5b2301401f"; //session.user.id;
 
     await connectDB();
-    const { title, content, tags } = await request.json();
+    const { title, content } = await request.json();
 
     if (!title) {
       return NextResponse.json(
@@ -45,7 +45,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const note = await Note.create({ userId, title, content, tags });
+    const note = await Note.create({ userId, title, content });
     return NextResponse.json({ message: "Note created!" }, { status: 201 });
   } catch (error) {
     console.log("Error while creating note", error);
