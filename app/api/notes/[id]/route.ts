@@ -1,7 +1,6 @@
 import { auth } from "@/auth";
 import { connectDB } from "@/lib/db";
 import { Note } from "@/models/Note";
-import { NextApiRequest } from "next";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(
@@ -18,7 +17,7 @@ export async function GET(
 
     return NextResponse.json(note[0]);
   } catch (error) {
-    console.log("Error while fetching note", error);
+    console.error("Error while fetching note", error);
     return NextResponse.json(
       { error: "Internal sever error" },
       { status: 500 }
@@ -52,7 +51,7 @@ export async function PUT(
 
     return NextResponse.json({ message: "Note updated!" }, { status: 201 });
   } catch (error) {
-    console.log("Error while updating note", error);
+    console.error("Error while updating note", error);
     return NextResponse.json(
       { error: "Internal sever error" },
       { status: 500 }
@@ -66,7 +65,6 @@ export async function DELETE(
 ) {
   try {
     const { id } = await params;
-    console.log(id);
     await connectDB();
 
     const note = await Note.findOneAndDelete({ _id: id });
@@ -76,7 +74,7 @@ export async function DELETE(
 
     return NextResponse.json({ message: "Note deleted!" }, { status: 201 });
   } catch (error) {
-    console.log("Error while deleting note", error);
+    console.error("Error while deleting note", error);
     return NextResponse.json(
       { error: "Internal sever error" },
       { status: 500 }

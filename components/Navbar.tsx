@@ -46,12 +46,12 @@ function Navbar() {
               </ul>
             </div>
           ) : (
-            <button
-              onClick={() => signIn("github")}
-              className="btn rounded-xl "
+            <Link href={"/login"}
+              // onClick={() => signIn("github")}
+              className="btn rounded-xl"
             >
-              Continue with GitHub
-            </button>
+              Get Started
+            </Link>
           )}
         </div>
       </nav>

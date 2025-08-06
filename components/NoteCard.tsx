@@ -1,6 +1,8 @@
 "use client"
 
+import { formatDate } from "@/lib/utils";
 import axios from "axios";
+import { Pencil, Trash2, Trash2Icon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { Dispatch, SetStateAction } from "react";
 
@@ -22,7 +24,6 @@ function NoteCard({ details, setNotes }: { details: CardInterface, setNotes: Set
 
   const handleDelete = async (id: string) => {
     if (!window.confirm("Are your sure you want to delete this note?")) return
-    console.log(id);
 
     try {
       axios.delete(API_URL + `/${id}`).then((res) => alert(res.data.message || "Note deleted"));
@@ -33,16 +34,22 @@ function NoteCard({ details, setNotes }: { details: CardInterface, setNotes: Set
   }
 
   return (
-    <div className="card card-border bg-base-100 shadow-lg w-full hover:shadow-xl" >
+    <div className="card card-border bg-base-100 shadow-lg shadow-accent w-full hover:shadow-xl" >
       <div className="card-body">
         <h2 className="card-title">{details?.title}</h2>
         <p>
           {details?.content}
         </p>
         
-        <div className="card-actions justify-end">
-          <button className="btn btn-accent rounded-xl w-18" onClick={handleCardClick}>Edit</button>
-          <button className="btn btn-error rounded-xl w-18" onClick={() => handleDelete(details?._id)}>Delete</button>
+        <div className="flex justify-between">
+          <div className="flex flex-col justify-start text-gray-500">
+            <span>Created At: </span>
+            <span>{formatDate(new Date(details?.createdAt!))}</span>
+          </div>
+          <div className="card-actions justify-end">
+          <button className="btn btn-accent rounded-xl w-14" onClick={handleCardClick}><Pencil /></button>
+          <button className="btn btn-error rounded-xl w-14 text-white" onClick={() => handleDelete(details?._id)}><Trash2 /></button>
+        </div>
         </div>
       </div>
     </div>

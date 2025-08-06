@@ -21,7 +21,7 @@ export default function RootLayout({
         suppressHydrationWarning
         // style={{ fontFamily: 'Manrope, \"Noto Sans\", sans-serif' }}
       >
-        <SessionWrapper>{children}</SessionWrapper>
+        <SessionWrapper >{children}</SessionWrapper>
       </body>
     </html>
   );

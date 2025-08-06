@@ -2,8 +2,7 @@
 
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
-import Link from "next/link";
-import { signIn } from "next-auth/react";
+
 
 export default function Home() {
   return (

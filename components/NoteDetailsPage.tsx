@@ -1,25 +1,33 @@
 "use client";
 
+import { formatDate } from "@/lib/utils";
 import axios from "axios";
-import { useParams } from "next/navigation";
-import { title } from "process";
+import { CircleArrowLeft, Trash2 } from "lucide-react";
+import Link from "next/link";
+import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const API_URL = process.env.NEXT_PUBLIC_URL + "/api/notes";
 
 function NoteDetailsPage() {
-  const [note, setNote] = useState({title: "", content: ""});
+  const [note, setNote] = useState({
+    title: "",
+    content: "",
+    createdAt: "",
+    updatedAt: "",
+  });
+  const [isLoading, setIsLoading] = useState(false);
+
   const params = useParams();
-  console.log(params.id);
+  const router = useRouter();
 
+  const noteId = params.id;
   const fetchNote = async () => {
-    let noteId = params.id;
-
     try {
       axios
         .get(API_URL + `/${noteId}`)
         .then((res) => setNote(res.data))
-        .catch((err) => console.log(err.response.data.message));
+        .catch((err) => console.error(err.response.data.message));
     } catch (error) {
       alert("Error while fetching notes" + error);
     }
@@ -29,24 +37,109 @@ function NoteDetailsPage() {
     fetchNote();
   }, []);
 
-  console.log(note)
+  const handleNoteUpdate = async (e: React.FormEvent<HTMLFormElement>) => {
+    setIsLoading(true);
+    e.preventDefault();
+    try {
+      axios.put(API_URL + `/${noteId}`, note).then((res) => {
+        alert(res.data.message || "Note Updated!");
+        router.back();
+      });
+    } catch (error) {
+      alert("Error while updating notes");
+      console.error(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setNote((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleDelete = async () => {
+    if (!window.confirm("Are your sure you want to delete this note?")) return;
+
+    try {
+      axios.delete(API_URL + `/${noteId}`).then((res) => {
+        alert(res.data.message || "Note deleted");
+        router.back();
+      });
+    } catch (error) {
+      alert("Error :" + error);
+    }
+  };
+
   return (
-    <div className="flex flex-col justify-center items-center h-full ">
-      <form className="flex flex-col gap-2 bg-base-200 border-base-300 rounded-box w-full sm:w-xl md:w-2xl border p-6">
-        <div>
-          <label className="label">Title</label>
-          <input value={note?.title}  className="input w-full" placeholder="Email" />
-        </div>
-        <div>
-          <label className="label ">Content</label>
+    <div className="flex flex-col  mx-auto bg-base-200 border-base-300 rounded-box w-full sm:w-xl md:w-2xl border p-6 ">
+      <h2 className="text-center mb-3 text-2xl font-bold">Note Details</h2>
+      <div className="flex justify-between mb-4">
+        <Link href={"/notes"} className="btn btn-ghost px-2 rounded-full ">
+          <CircleArrowLeft />
+        </Link>
+        <button
+          onClick={handleDelete}
+          className="btn btn-ghost px-2 rounded-xl text-error"
+        >
+          <Trash2 />
+        </button>
+      </div>
+
+      <form onSubmit={handleNoteUpdate} className="flex flex-col gap-2 ">
+        <div className="space-y-1">
+          <label className="label">Title:</label>
           <input
-          value={note?.content}
+            value={note.title}
+            onChange={handleChange}
+            name="title"
             className="input w-full"
+            placeholder="Title"
+            required
+          />
+        </div>
+        <div className="space-y-1">
+          <label className="label">Content:</label>
+          <input
+            value={note.content}
+            className="input w-full"
+            name="content"
             placeholder="Content"
+            onChange={handleChange}
+            required
           />
         </div>
 
-        <button className="btn btn-neutral mt-4 rounded-xl">Save</button>
+        <div className="space-y-1">
+          <label className="label ">Created At:</label>
+          <input
+            value={formatDate(new Date(note.createdAt!))}
+            className="input w-full"
+            name="content"
+            placeholder="Created At"
+            readOnly
+            required
+          />
+        </div>
+
+        <div className="space-y-1">
+          <label className="label ">Updated At:</label>
+          <input
+            value={formatDate(new Date(note.updatedAt!))}
+            className="input w-full"
+            name="content"
+            placeholder="Updated At"
+            readOnly
+            required
+          />
+        </div>
+
+        <button className="btn btn-neutral mt-4 rounded-xl">
+          {isLoading ? "Saving..." : "Save"}
+        </button>
       </form>
     </div>
   );
