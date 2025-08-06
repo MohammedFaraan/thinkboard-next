@@ -41,7 +41,7 @@ export default function Notes() {
         )}
       </div>
 
-      <div className="absolute flex gap-2 bottom-12 sm:bottom-20 right-4 md:right-10 drop-shadow-lg ">
+      <div className="fixed flex gap-2 bottom-12 sm:bottom-20 right-4 md:right-10 drop-shadow-lg ">
         <Link href="/notes/create" className="btn rounded-xl ">
           <SquarePen />
           <span className="text-lg">Create Note</span> 
