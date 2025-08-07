@@ -3,8 +3,9 @@
 import axios from "axios";
 import { CircleArrowLeft, Trash2 } from "lucide-react";
 import Link from "next/link";
-import { useParams, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { toast } from "react-toastify";
 
 const API_URL = process.env.NEXT_PUBLIC_URL + "/api/notes";
 
@@ -12,8 +13,6 @@ function NoteCreatePage() {
   const [note, setNote] = useState({
     title: "",
     content: "",
-    createdAt: "",
-    updatedAt: "",
   });
   const [isLoading, setIsLoading] = useState(false);
 
@@ -24,11 +23,11 @@ function NoteCreatePage() {
     setIsLoading(true);
     try {
       axios.post(API_URL, note).then((res) => {
-        alert(res.data.message || "Note Updated!");
+        toast.success(res.data.message || "Note Created!", { autoClose: 2000 });
         router.back();
       });
     } catch (error) {
-      alert("Error while updating notes");
+      toast.error("Error while updating notes", { autoClose: 2000 });
       console.error(error);
     } finally {
       setIsLoading(false);

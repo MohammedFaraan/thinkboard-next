@@ -41,7 +41,7 @@ export default function Notes() {
             <NoteCard details={note} setNotes={setNotes} key={index} />
           ))
         ) : (
-          <div>No notes found</div>
+          <div className="text-xl font-medium mt-5 ">No notes found</div>
         )}
       </div>
 

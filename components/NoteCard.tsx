@@ -2,9 +2,10 @@
 
 import { formatDate } from "@/lib/utils";
 import axios from "axios";
-import { Pencil, Trash2, Trash2Icon } from "lucide-react";
+import { Pencil, Trash2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { Dispatch, SetStateAction } from "react";
+import { toast } from "react-toastify";
 
 interface CardInterface {
   _id: string;
@@ -14,6 +15,7 @@ interface CardInterface {
   createdAt: Date;
   updatedAt: Date;
 }
+
 const API_URL = process.env.NEXT_PUBLIC_URL + "/api/notes";
 type SetNotesType = Dispatch<SetStateAction<CardInterface[]>>;
 
@@ -31,15 +33,15 @@ function NoteCard({
   };
 
   const handleDelete = async (id: string) => {
-    if (!window.confirm("Are your sure you want to delete this note?")) return;
+    if (!window.confirm("Are you sure you want to delete this note?")) return;
 
     try {
       axios
         .delete(API_URL + `/${id}`)
-        .then((res) => alert(res.data.message || "Note deleted"));
+        .then((res) => toast.success(res.data.message || "Note deleted", {autoClose: 2000}));
       setNotes((prev) => prev.filter((note) => note._id !== id));
     } catch (error) {
-      alert("Error :" + error);
+      toast.error("Error :" + error);
     }
   };
 
