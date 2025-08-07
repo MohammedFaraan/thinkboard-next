@@ -11,6 +11,8 @@ interface CardInterface {
   title: string,
   content: string,
   userID: string,
+  createdAt: Date,
+  updatedAt: Date
 }
 const API_URL = process.env.NEXT_PUBLIC_URL + "/api/notes";
 type SetNotesType = Dispatch<SetStateAction<CardInterface[]>>;
