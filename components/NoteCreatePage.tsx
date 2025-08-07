@@ -52,9 +52,6 @@ function NoteCreatePage() {
         <Link href={"/notes"} className="btn btn-ghost px-2 rounded-full ">
           <CircleArrowLeft />
         </Link>
-        {/* <button onClick={handleDelete} className="btn btn-ghost px-2 rounded-xl text-error">
-          <Trash2 />
-        </button> */}
       </div>
 
       <form onSubmit={handleCreateNote} className="flex flex-col gap-2 ">
