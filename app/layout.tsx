@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 // import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { SessionProvider } from "next-auth/react";
 import SessionWrapper from "@/components/auth/session-wrapper";
 import { ToastContainer } from "react-toastify";
 
@@ -21,8 +20,7 @@ export default function RootLayout({
         className="flex flex-col size-full min-h-screen"
         suppressHydrationWarning
         // style={{ fontFamily: 'Manrope, \"Noto Sans\", sans-serif' }}
-      >
-        <SessionWrapper >{children}</SessionWrapper>
+      >        <SessionWrapper >{children}</SessionWrapper>
         <ToastContainer />
       </body>
     </html>

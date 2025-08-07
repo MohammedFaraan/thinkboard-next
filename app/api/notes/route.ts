@@ -6,12 +6,12 @@ import { NextRequest, NextResponse } from "next/server";
 export async function GET() {
   try {
     // 1️⃣ Get the current session
-    // const session = await auth();
-    // if (!session?.user) {
-    //   return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    // }
+    const session = await auth();
+    if (!session?.user) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
 
-    const userId = "688f1aba61ba7a5b2301401f"; //session.user.id;
+    const userId = session.user.id;
 
     await connectDB();
     const notes = await Note.find({ userId: userId }).sort({ updatedAt: -1 });
@@ -28,12 +28,12 @@ export async function GET() {
 export async function POST(request: NextRequest) {
   try {
     // 1️⃣ Get the current session
-    // const session = await auth();
-    // if (!session?.user) {
-    //   return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    // }
+    const session = await auth();
+    if (!session?.user) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
 
-    const userId = "688f1aba61ba7a5b2301401f"; //session.user.id;
+    const userId = session.user.id;
 
     await connectDB();
     const { title, content } = await request.json();
