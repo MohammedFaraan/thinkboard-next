@@ -43,7 +43,6 @@ export const { handlers, auth } = NextAuth({
       session.user.id = dbUser._id!;
       session.user.name = dbUser.name!;
       session.user.email = dbUser.email!;
-      // session.user.profilePic = dbUser.profilePic!;
       return session;
     },
   },
