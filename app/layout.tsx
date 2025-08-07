@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { SessionProvider } from "next-auth/react";
 import SessionWrapper from "@/components/auth/session-wrapper";
+import { ToastContainer } from "react-toastify";
 
 export const metadata: Metadata = {
   title: "ThinkBoard",
@@ -22,6 +23,7 @@ export default function RootLayout({
         // style={{ fontFamily: 'Manrope, \"Noto Sans\", sans-serif' }}
       >
         <SessionWrapper >{children}</SessionWrapper>
+        <ToastContainer />
       </body>
     </html>
   );

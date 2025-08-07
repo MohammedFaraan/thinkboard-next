@@ -37,7 +37,7 @@ export default function Notes() {
             />
           ))
         ) : (
-          <div>No notes found</div>
+          <div className="text-xl font-medium mt-5 ">No notes found</div>
         )}
       </div>
 

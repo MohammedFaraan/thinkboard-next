@@ -6,6 +6,7 @@ import { CircleArrowLeft, Trash2 } from "lucide-react";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 const API_URL = process.env.NEXT_PUBLIC_URL + "/api/notes";
 
@@ -29,7 +30,7 @@ function NoteDetailsPage() {
         .then((res) => setNote(res.data))
         .catch((err) => console.error(err.response.data.message));
     } catch (error) {
-      alert("Error while fetching notes" + error);
+      toast.error("Error while fetching notes", {autoClose: 2000});
     }
   };
 
@@ -42,11 +43,11 @@ function NoteDetailsPage() {
     e.preventDefault();
     try {
       axios.put(API_URL + `/${noteId}`, note).then((res) => {
-        alert(res.data.message || "Note Updated!");
+        toast.success(res.data.message || "Note Updated!", {autoClose: 2000});
         router.back();
       });
     } catch (error) {
-      alert("Error while updating notes");
+      toast.error("Error while updating notes", {autoClose: 2000});
       console.error(error);
     } finally {
       setIsLoading(false);
@@ -62,15 +63,15 @@ function NoteDetailsPage() {
   };
 
   const handleDelete = async () => {
-    if (!window.confirm("Are your sure you want to delete this note?")) return;
+    if (!window.confirm("Are you sure you want to delete this note?")) return;
 
     try {
       axios.delete(API_URL + `/${noteId}`).then((res) => {
-        alert(res.data.message || "Note deleted");
+        toast.success(res.data.message || "Note deleted", {autoClose: 2000});
         router.back();
       });
     } catch (error) {
-      alert("Error :" + error);
+      toast.error("Error while deleting notes", {autoClose: 2000});
     }
   };
 
