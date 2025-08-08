@@ -6,8 +6,7 @@ export async function GET(req: NextRequest) {
   try {
     const url = new URL(req.url);
     const id = url.pathname.split("/").pop(); // or parse id from URL search params
-    console.log(url);
-    console.log(id);
+
     await connectDB();
     const note = await Note.find({ _id: id });
 
@@ -29,8 +28,7 @@ export async function PUT(req: NextRequest) {
     // const { id } = await params;
     const url = new URL(req.url);
     const id = url.pathname.split("/").pop(); // or parse id from URL search params
-    console.log(url);
-    console.log(id);
+
     await connectDB();
     const { title, content } = await req.json();
 
@@ -55,12 +53,12 @@ export async function PUT(req: NextRequest) {
   }
 }
 
-export async function DELETE(
-  _: NextRequest,
-  { params }: { params: { id: string } }
-) {
+export async function DELETE(req: NextRequest) {
   try {
-    const { id } = await params;
+    // const { id } = await params;
+    const url = new URL(req.url);
+    const id = url.pathname.split("/").pop(); // or parse id from URL search params
+
     await connectDB();
 
     const note = await Note.findOneAndDelete({ _id: id });
