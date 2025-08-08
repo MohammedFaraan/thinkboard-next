@@ -16,12 +16,10 @@ function Navbar() {
   return (
     <header className="w-full">
       <nav className="navbar shadow-sm px-3 sm:px-5 ">
-        <div className="navbar-start gap-x-1.5 ">
-          <Image src="/favicon.ico" alt="logo" width={28} height={28}/>
-          <Link href={"/"} className="font-bold text-2xl my-auto">
-            ThinkBoard
-          </Link>
-        </div>
+        <Link href={"/"} className="navbar-start gap-x-1">
+          <Image src="/favicon.ico" alt="logo" width={25} height={25} />
+          <span className="font-bold text-xl my-auto">ThinkBoard</span>
+        </Link>
 
         <div className="navbar-end">
           {session?.user ? (
