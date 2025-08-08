@@ -28,7 +28,7 @@ function Navbar() {
                 <li>
                   <details>
                     <summary className="font-bold btn">
-                      <span className="text-[11px] md:text-md ">{`Welcome ${session?.user?.name}`}</span>
+                      <span className="text-[11px]  sm:text-lg">{`Welcome ${session?.user?.name}`}</span>
                     </summary>
 
                     <ul className="bg-base-100 top-9 right-2 z-1 w-40 p-2">
