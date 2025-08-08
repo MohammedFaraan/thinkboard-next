@@ -38,7 +38,9 @@ function NoteCard({
     try {
       axios
         .delete(API_URL + `/${id}`)
-        .then((res) => toast.success(res.data.message || "Note deleted", {autoClose: 2000}));
+        .then((res) =>
+          toast.success(res.data.message || "Note deleted", { autoClose: 2000 })
+        );
       setNotes((prev) => prev.filter((note) => note._id !== id));
     } catch (error) {
       toast.error("Error :" + error);

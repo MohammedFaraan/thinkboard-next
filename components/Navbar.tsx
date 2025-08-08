@@ -1,5 +1,5 @@
 "use client";
-import { signIn, signOut, useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React from "react";
@@ -16,7 +16,7 @@ function Navbar() {
     <header className="w-full">
       <nav className="navbar shadow-sm px-3 sm:px-5 ">
         <div className="navbar-start gap-x-1.5">
-          <img src="/logo.png" alt="logo" />
+          <img src="/favicon.ico" alt="logo" className="size-7" />
           <Link href={"/"} className="font-bold text-xl ">
             ThinkBoard
           </Link>
@@ -28,10 +28,10 @@ function Navbar() {
               <ul className="menu menu-horizontal px-1">
                 <li>
                   <details>
-                    <summary className=" font-bold btn"><span className=" sm:flex">{`Welcome ${session?.user?.name}`}</span>
-                    {/* <span className="flex  sm:hidden md:hidden">Welcome</span> */}
+                    <summary className="font-bold btn">
+                      <span className="sm:flex">{`Welcome ${session?.user?.name}`}</span>
                     </summary>
-                    
+
                     <ul className="bg-base-100 top-9 right-2 z-1 w-40 p-2">
                       <li>
                         <Link href={"/notes"}>Notes</Link>
@@ -46,7 +46,8 @@ function Navbar() {
               </ul>
             </div>
           ) : (
-            <Link href={"/login"}
+            <Link
+              href={"/login"}
               // onClick={() => signIn("github")}
               className="btn rounded-xl"
             >

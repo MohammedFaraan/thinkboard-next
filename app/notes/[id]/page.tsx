@@ -12,5 +12,5 @@ function NoteDetails() {
 export default NoteDetails;
 
 export const metadata: Metadata = {
-  title: 'ThinkBoard - Note',
-}
+  title: "ThinkBoard - Note",
+};
