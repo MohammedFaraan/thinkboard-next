@@ -32,7 +32,10 @@ export default function Home() {
                         organized and accessible.
                       </h2>
                     </div>
-                    <Link href={"/notes"} className="btn rounded-full shadow-none">
+                    <Link
+                      href={"/notes"}
+                      className="btn rounded-full shadow-none"
+                    >
                       <span className="truncate">Get Started</span>
                     </Link>
                   </div>
@@ -46,7 +49,7 @@ export default function Home() {
                   <p className="text-[#101418] text-base font-normal leading-normal max-w-[720px]">
                     ThinkBoard syncs your notes across all your devices, so you
                     can access your information anytime, anywhere. Whether
-                    you're on your computer, tablet, or phone, your notes are
+                    you&apos;re on your computer, tablet, or phone, your notes are
                     always at your fingertips.
                   </p>
                 </div>
