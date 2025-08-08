@@ -3,7 +3,7 @@ import NoteCard from "@/components/NoteCard";
 import axios from "axios";
 import { SquarePen } from "lucide-react";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 const API_URL = process.env.NEXT_PUBLIC_URL + "/api/notes";
 
@@ -17,14 +17,14 @@ export default function Notes() {
     updatedAt: Date;
   }
   const [notes, setNotes] = useState<CardInterface[]>([]);
-  const fetchNotes = () => {
+  const fetchNotes = useCallback(() => {
     try {
       axios.get(API_URL).then((res) => setNotes(res.data));
     } catch (err) {
       console.log(err);
       alert("Error while fetching notes");
     }
-  };
+  }, []);
 
   useEffect(() => {
     document.title = "ThinkBoard - Notes";

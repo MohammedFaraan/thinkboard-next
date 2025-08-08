@@ -5,7 +5,7 @@ import axios from "axios";
 import { CircleArrowLeft, Trash2 } from "lucide-react";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 const API_URL = process.env.NEXT_PUBLIC_URL + "/api/notes";
@@ -23,16 +23,16 @@ function NoteDetailsPage() {
   const router = useRouter();
 
   const noteId = params.id;
-  const fetchNote = async () => {
+  const fetchNote = useCallback(async () => {
     try {
       axios
         .get(API_URL + `/${noteId}`)
         .then((res) => setNote(res.data))
         .catch((err) => console.error(err.response.data.message));
     } catch (error) {
-      toast.error("Error while fetching notes", {autoClose: 2000});
+      toast.error("Error while fetching notes", { autoClose: 2000 });
     }
-  };
+  }, []);
 
   useEffect(() => {
     fetchNote();
@@ -43,11 +43,11 @@ function NoteDetailsPage() {
     e.preventDefault();
     try {
       axios.put(API_URL + `/${noteId}`, note).then((res) => {
-        toast.success(res.data.message || "Note Updated!", {autoClose: 2000});
+        toast.success(res.data.message || "Note Updated!", { autoClose: 2000 });
         router.back();
       });
     } catch (error) {
-      toast.error("Error while updating notes", {autoClose: 2000});
+      toast.error("Error while updating notes", { autoClose: 2000 });
       console.error(error);
     } finally {
       setIsLoading(false);
@@ -67,11 +67,11 @@ function NoteDetailsPage() {
 
     try {
       axios.delete(API_URL + `/${noteId}`).then((res) => {
-        toast.success(res.data.message || "Note deleted", {autoClose: 2000});
+        toast.success(res.data.message || "Note deleted", { autoClose: 2000 });
         router.back();
       });
     } catch (error) {
-      toast.error("Error while deleting notes", {autoClose: 2000});
+      toast.error("Error while deleting notes", { autoClose: 2000 });
     }
   };
 
