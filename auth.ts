@@ -26,11 +26,11 @@ export const { handlers, auth } = NextAuth({
         await connectDB();
 
         const u = await User.findOneAndUpdate(
-          { email: user.email! },
+          { email: user.email },
           {
-            name: user.name!,
-            email: user.email!,
-            profilePic: user.image!,
+            name: user.name,
+            email: user.email,
+            profilePic: user.image,
           },
           { upsert: true }
         );
@@ -40,9 +40,9 @@ export const { handlers, auth } = NextAuth({
     },
     async session({ session }) {
       const dbUser = await User.findOne({ email: session.user.email });
-      session.user.id = dbUser._id!;
-      session.user.name = dbUser.name!;
-      session.user.email = dbUser.email!;
+      session.user.id = dbUser._id;
+      session.user.name = dbUser.name;
+      session.user.email = dbUser.email;
       return session;
     },
   },

@@ -36,7 +36,7 @@ function NoteDetailsPage() {
 
   useEffect(() => {
     fetchNote();
-  }, []);
+  }, [fetchNote]);
 
   const handleNoteUpdate = async (e: React.FormEvent<HTMLFormElement>) => {
     setIsLoading(true);
@@ -117,7 +117,7 @@ function NoteDetailsPage() {
         <div className="space-y-1">
           <label className="label ">Created At:</label>
           <input
-            value={formatDate(new Date(note.createdAt!))}
+            value={formatDate(new Date(note.createdAt))}
             className="input w-full"
             name="content"
             placeholder="Created At"
@@ -129,7 +129,7 @@ function NoteDetailsPage() {
         <div className="space-y-1">
           <label className="label ">Updated At:</label>
           <input
-            value={formatDate(new Date(note.updatedAt!))}
+            value={formatDate(new Date(note.updatedAt))}
             className="input w-full"
             name="content"
             placeholder="Updated At"

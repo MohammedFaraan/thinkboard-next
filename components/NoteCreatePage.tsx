@@ -1,7 +1,7 @@
 "use client";
 
 import axios from "axios";
-import { CircleArrowLeft, Trash2 } from "lucide-react";
+import { CircleArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";

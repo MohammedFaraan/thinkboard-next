@@ -1,5 +1,6 @@
 "use client";
 import { signOut, useSession } from "next-auth/react";
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React from "react";
@@ -16,7 +17,7 @@ function Navbar() {
     <header className="w-full">
       <nav className="navbar shadow-sm px-3 sm:px-5 ">
         <div className="navbar-start gap-x-1.5 ">
-          <img src="/favicon.ico" alt="logo" className="size-7" />
+          <Image src="/favicon.ico" alt="logo" className="size-7" />
           <Link href={"/"} className="font-bold text-2xl my-auto">
             ThinkBoard
           </Link>

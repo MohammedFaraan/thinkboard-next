@@ -56,7 +56,7 @@ function NoteCard({
         <div className="flex justify-between">
           <div className="flex flex-col justify-start text-gray-500">
             <span>Created At: </span>
-            <span>{formatDate(new Date(details?.createdAt!))}</span>
+            <span>{formatDate(new Date(details?.createdAt))}</span>
           </div>
           <div className="card-actions justify-end">
             <button
