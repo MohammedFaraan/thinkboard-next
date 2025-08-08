@@ -50,8 +50,8 @@ export default function Home() {
                     always at your fingertips.
                   </p>
                 </div>
-                <div className="grid grid-cols-[repeat(auto-fit,minmax(158px,1fr))] gap-3">
-                  <div className="flex flex-col gap-3 pb-3">
+                <div className="grid grid-cols-[repeat(auto-fit,minmax(158px,1fr))] gap-4">
+                  <div className="flex flex-col gap-3 pb-3 transition-transform duration-300 ease-in-out hover:scale-105">
                     <div
                       className="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
                       style={{ backgroundImage: "url(/notes.png)" }}
@@ -66,7 +66,7 @@ export default function Home() {
                       </p>
                     </div>
                   </div>
-                  <div className="flex flex-col gap-3 pb-3">
+                  <div className="flex flex-col gap-3 pb-3 transition-transform duration-300 ease-in-out hover:scale-105">
                     <div
                       className="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
                       style={{ backgroundImage: "url(/laptop.png)" }}
@@ -81,7 +81,7 @@ export default function Home() {
                       </p>
                     </div>
                   </div>
-                  <div className="flex flex-col gap-3 pb-3">
+                  <div className="flex flex-col gap-3 pb-3 transition-transform duration-300 ease-in-out hover:scale-105">
                     <div
                       className="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
                       style={{ backgroundImage: "url(/access-anywhere.png)" }}
