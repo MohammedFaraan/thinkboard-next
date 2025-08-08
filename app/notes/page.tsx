@@ -2,6 +2,7 @@
 import NoteCard from "@/components/NoteCard";
 import axios from "axios";
 import { SquarePen } from "lucide-react";
+import { Metadata } from "next";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -27,6 +28,7 @@ export default function Notes() {
   };
 
   useEffect(() => {
+    document.title = "ThinkBoard - Notes";
     fetchNotes();
   }, []);
 
@@ -54,3 +56,4 @@ export default function Notes() {
     </div>
   );
 }
+

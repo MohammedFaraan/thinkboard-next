@@ -7,6 +7,10 @@ import { ToastContainer } from "react-toastify";
 export const metadata: Metadata = {
   title: "ThinkBoard",
   description: "Platform to take notes",
+    icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+    }
 };
 
 export default function RootLayout({

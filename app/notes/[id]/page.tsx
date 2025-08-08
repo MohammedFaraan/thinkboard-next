@@ -1,4 +1,5 @@
 import NoteDetailsPage from "@/components/NoteDetailsPage";
+import { Metadata } from "next";
 
 function NoteDetails() {
   return (
@@ -9,3 +10,7 @@ function NoteDetails() {
 }
 
 export default NoteDetails;
+
+export const metadata: Metadata = {
+  title: 'ThinkBoard - Note',
+}
