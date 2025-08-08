@@ -1,14 +1,13 @@
-import { auth } from "@/auth";
 import { connectDB } from "@/lib/db";
 import { Note } from "@/models/Note";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(
-  _: NextRequest,
-  { params }: { params: { id: string } }
-) {
+export async function GET(req: NextRequest) {
   try {
-    const { id } = await params;
+    const url = new URL(req.url);
+    const id = url.pathname.split("/").pop(); // or parse id from URL search params
+    console.log(url);
+    console.log(id);
     await connectDB();
     const note = await Note.find({ _id: id });
 
@@ -25,15 +24,15 @@ export async function GET(
   }
 }
 
-export async function PUT(
-  request: NextRequest,
-  { params }: { params: { id: string } }
-) {
+export async function PUT(req: NextRequest) {
   try {
-    const { id } = await params;
-
+    // const { id } = await params;
+    const url = new URL(req.url);
+    const id = url.pathname.split("/").pop(); // or parse id from URL search params
+    console.log(url);
+    console.log(id);
     await connectDB();
-    const { title, content } = await request.json();
+    const { title, content } = await req.json();
 
     if (!title) {
       return NextResponse.json(
@@ -41,10 +40,7 @@ export async function PUT(
         { status: 400 }
       );
     }
-    const note = await Note.findOneAndUpdate(
-      { _id: id },
-      { title, content }
-    );
+    const note = await Note.findOneAndUpdate({ _id: id }, { title, content });
 
     if (!note)
       return NextResponse.json({ message: "Note not found" }, { status: 404 });

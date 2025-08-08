@@ -30,7 +30,7 @@ export default function Login() {
             Sign in with GitHub
           </button>
           <button
-            onClick={() => signIn("google")}
+            onClick={() => alert("Google sigin will be available soon...")}
             className="flex items-center w-full justify-center cursor-pointer gap-3 bg-white hover:bg-gray-200 text-[#101418] font-semibold py-3 px-6 rounded-lg mb-2 transition-colors border border-gray-300"
           >
             <svg width="24" height="24" viewBox="0 0 48 48">
