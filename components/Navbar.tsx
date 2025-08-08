@@ -24,11 +24,11 @@ function Navbar() {
         <div className="navbar-end">
           {session?.user ? (
             <div className="flex-none">
-              <ul className="menu menu-horizontal px-1">
+              <ul className="menu menu-horizontal px-1 ">
                 <li>
                   <details>
                     <summary className="font-bold btn">
-                      <span className="sm:flex">{`Welcome ${session?.user?.name}`}</span>
+                      <span className="text-[12px] text-md ">{`Welcome ${session?.user?.name}`}</span>
                     </summary>
 
                     <ul className="bg-base-100 top-9 right-2 z-1 w-40 p-2">
